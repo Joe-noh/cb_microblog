@@ -1,1 +1,13 @@
-<h1>Oops!! This is {{ code }}!!</h1>
+{% extends "base.html" %}
+
+{% block title %}
+That's too bad...
+{% endblock %}
+
+{% block page_title %}
+Oops!!
+{% endblock %}
+
+{% block content %}
+<h2>This is {{ code }}!!</h2>
+{% endblock %}
