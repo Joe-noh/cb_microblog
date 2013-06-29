@@ -9,3 +9,4 @@
 % {% reverse string="hello" %} => "olleh"
 %
 % Variables are the passed-in vars in your template
+

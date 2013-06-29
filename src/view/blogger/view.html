@@ -1,0 +1,10 @@
+<h1>Blogger {{ blogger.name }}'s Page</h1>
+
+<table>
+	{% for status in statuses %}
+	<tr>
+		<td>{{ status.text }}</td>
+		<td>{{ status.timestamp|timestamp2date }}</td>
+	</tr>
+	{% endfor %}
+</table>

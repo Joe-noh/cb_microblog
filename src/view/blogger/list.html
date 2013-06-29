@@ -1,0 +1,7 @@
+<h1>Bloggers</h1>
+
+<ul>
+	{% for blogger in bloggers %}
+	<li><a href="/blogger/{{ blogger.name }}">{{ blogger.name }}</a></li>
+	{% endfor %}
+</ul>
