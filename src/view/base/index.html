@@ -1,1 +1,37 @@
-<h1>This is Index Page.</h1>
+{% extends "base.html" %}
+
+{% block inside_header %}
+<style type="text/css">
+.bigtitle {
+    font-weight: 999;
+    font-size: 500%;
+    text-align: center;
+    margin: 10px 0px 40px;
+}
+
+.lead {
+    text-align: center;
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<h1 class="bigtitle">Welcome to CB Microblog</h1>
+<div class="row">
+    <div class="span10 offset1">
+        <div class="lead">
+            This is a Chicago Boss sample application.<br />
+            Source code is <a href="https://github.com/Joe-noh/cb_microblog">here</a>.
+            Pull requests are welcomed.
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="span2 offset4">
+        <a href='{% url action="signup" %}' class="btn btn-large">Register</a>
+    </div>
+    <div class="span2 offset1">
+        <a href='{% url action="signin" %}' class="btn btn-large">Sign in</a>
+    </div>
+</div>
+{% endblock %}
