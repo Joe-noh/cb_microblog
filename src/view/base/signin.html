@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}CB Microblog | Sign in{% endblock %}
+
+{% block page_title %}Sign in{% endblock %}
+
+{% block content %}
+{% if error %}
+<div class="block-message alert-message error">
+    <p>{{ error }}</p>
+</div>
+{% endif %}
+
+<form method="post">
+    Name<br />
+    <input name="username" type="text"/><br /><br />
+    Password<br />
+    <input name="password" type="password" /><br /><br />
+    <button class="btn" type="submit">Sign in</button>
+</form>
+{% endblock %}

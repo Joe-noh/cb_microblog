@@ -1,6 +1,9 @@
+{% extends "base.html"%}
+
+{% block content %}
 <h1>Blogger {{ blogger.name }}'s Page</h1>
 
-<table>
+<table class="table">
 	{% for status in statuses %}
 	<tr>
 		<td>{{ status.text }}</td>
@@ -8,3 +11,4 @@
 	</tr>
 	{% endfor %}
 </table>
+{% endblock %}

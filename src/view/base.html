@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+
+    <title>{% block title %}CB Microblog{% endblock %}</title>
+</head>
+<body>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="brand" href="/">CB Microblog</a>
+                {% block navbar %}{% endblock %}
+            </div>
+        </div>
+    </div>
+    <div class="container" style="padding-top: 60px">
+        <h1>{% block page_title %}{% endblock %}</h1>
+        <br />
+        {% block content %}{% endblock %}
+    </div>
+</body>
+</html>
