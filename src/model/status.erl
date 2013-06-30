@@ -1,4 +1,4 @@
--module(status, [Id, BloggerId, Text, Timestamp]).
+-module(status, [Id, BloggerId::string(), Text::string(), Timestamp]).
 -compile(export_all).
 
 -belongs_to(blogger).

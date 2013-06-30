@@ -1,6 +1,6 @@
 -module(cb_microblog_custom_filters).
-%-compile([timestamp2date/1]).
--compile(export_all).
+-export([timestamp2date/1]).
+
 % put custom filters in here, e.g.
 %
 % my_reverse(Value) ->

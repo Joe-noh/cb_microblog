@@ -15,9 +15,13 @@
 
 {"/", [{controller, "base"}, {action, "index"}]}.
 
+{"/signin", [{controller, "base"}, {action, "signin"}]}.
+{"/signup", [{controller, "base"}, {action, "signup"}]}.
+
 {"/blogger/(\\w+)", [{controller, "blogger"}, {action, "view"}, {name, '$1'}]}.
 {"/bloggers", [{controller, "blogger"}, {action, "list"}]}.
 
 {404, [{controller, "base"}, {action, "missing"}, {code, "404"}]}.
-
 {500, [{controller, "base"}, {action, "missing"}, {code, "500"}]}.
+
+{"/base/.*", [{controller, "base"}, {action, "missing"}, {code, "404"}]}.

@@ -5,20 +5,19 @@
 {% block page_title %}Sign up{% endblock %}
 
 {% block content %}
-
 {% if error %}
-<div class="block-message alert-message error">
-    <p>{{ error }}</p>
+<div class="alert alert-error">
+    {{ error }}
 </div>
 {% endif %}
 
 <form method="post">
     Name<br />
-    <input name="username" type="text"/><br /><br />
+    <input name="name" type="text"/><br /><br />
     Password<br />
     <input name="password" type="password" /><br /><br />
     Password Confirmation<br />
-    <input name="password_conf" type="password" /><br /><br />
+    <input name="confirmation" type="password" /><br /><br />
     <button class="btn" type="submit">Sign up</button>
 </form>
 {% endblock %}

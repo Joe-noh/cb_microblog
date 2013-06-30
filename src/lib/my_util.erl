@@ -13,3 +13,6 @@ clean_text(Text) ->
 
 cleaned_length(Text) ->
     length(clean_text(Text)).
+
+format_string(Pattern, Values) ->
+    lists:flatten(io_lib:format(Pattern, Values)).
