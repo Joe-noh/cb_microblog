@@ -12,5 +12,5 @@ validation_tests() ->
 
 before_create() ->
     {M, S, U} = os:timestamp(),
-    Status = THIS:set([{text, string:strip(Text)}, {timestamp, 1000000000000*M + 1000000*S + U}]),
+    Status = THIS:set([{text, my_util:clean_text(Text)}, {timestamp, 1000000000000*M + 1000000*S + U}]),
     {ok, Status}.

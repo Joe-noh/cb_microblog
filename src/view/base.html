@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="/static/bootstrap/css/bootstrap.css">
-    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/static/bootstrap/js/bootstrap.js"></script>
     {% block inside_header %}{% endblock %}
 
     <title>{% block title %}CB Microblog{% endblock %}</title>
@@ -13,8 +13,23 @@
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
             <div class="container">
+                {% if loggedin %}
+                <a class="brand" href="/{{ loggedin.name }}">CB Microblog</a>
+                <ul class="nav pull-right">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{ loggedin.name }}<b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/{{ loggedin.name }}">My Page</a></li>
+                            <li class="divider"></li>
+                            <li><a href="/signout">Sign Out</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                {% else %}
                 <a class="brand" href="/">CB Microblog</a>
-                {% block navbar %}{% endblock %}
+                {% endif %}
             </div>
         </div>
     </div>

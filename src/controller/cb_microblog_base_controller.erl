@@ -1,7 +1,7 @@
 -module(cb_microblog_base_controller, [Req]).
 -compile(export_all).
 
-index('GET', []) -> ok.
+index('GET', []) -> {ok, [{loggedin, auth_helper:is_logged_in(Req)}]}.
 
 missing('GET', [Code]) -> {ok, [{code, Code}]}.
 
@@ -9,7 +9,7 @@ signin('GET',  []) -> ok;
 signin('POST', []) ->
     Name = Req:post_param("name"),
     GivenPass = Req:post_param("password"),
-    case boss_db:find_first(blogger, [name, 'equals', Name]) of
+    case boss_db:find_first(blogger, [name, equals, Name]) of
         undefined ->
             {ok, [{error, my_util:string_format("'~p' does not exist.", [Name])}]};
         Blogger ->
