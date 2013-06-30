@@ -1,11 +1,23 @@
 -module(cb_microblog_base_controller, [Req]).
 -compile(export_all).
 
-index('GET', []) -> {ok, [{loggedin, auth_helper:is_logged_in(Req)}]}.
+index('GET', []) ->
+    case auth_helper:is_logged_in(Req) of
+        false   -> ok;
+        Blogger -> {redirect, "/blogger/"++Blogger:name()}
+    end.
 
-missing('GET', [Code]) -> {ok, [{code, Code}]}.
+missing('GET', [Code]) ->
+    case auth_helper:is_logged_in(Req) of
+        false   -> {ok, [{code, Code}]};
+        Blogger -> {ok, [{code, Code}, {loggedin, Blogger}]}
+    end.
 
-signin('GET',  []) -> ok;
+signin('GET',  []) ->
+    case auth_helper:is_logged_in(Req) of
+        false   -> ok;
+        Blogger -> {redirect, "/blogger/"++Blogger:name()}
+    end;
 signin('POST', []) ->
     Name = Req:post_param("name"),
     GivenPass = Req:post_param("password"),
@@ -21,7 +33,14 @@ signin('POST', []) ->
             end
     end.
 
-signup('GET',  []) -> ok;
+signout('GET', []) ->
+    {redirect, "/", auth_helper:discard_cookies()}.
+
+signup('GET',  []) ->
+    case auth_helper:is_logged_in(Req) of
+        false   -> ok;
+        Blogger -> {redirect, "/blogger/"++Blogger:name()}
+    end;
 signup('POST', []) ->
     Name = Req:post_param("name"),
     Password = Req:post_param("password"),

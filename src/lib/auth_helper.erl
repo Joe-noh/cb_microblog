@@ -23,3 +23,7 @@ is_logged_in(Req) ->
                     end
             end
      end.
+
+discard_cookies() ->
+    [mochiweb_cookies:cookie("blogger_id", "", [{path, "/"}]),
+     mochiweb_cookies:cookie("session_id", "", [{path, "/"}])].

@@ -15,8 +15,9 @@
 
 {"/", [{controller, "base"}, {action, "index"}]}.
 
-{"/signin", [{controller, "base"}, {action, "signin"}]}.
-{"/signup", [{controller, "base"}, {action, "signup"}]}.
+{"/signin",  [{controller, "base"}, {action, "signin" }]}.
+{"/signout", [{controller, "base"}, {action, "signout"}]}.
+{"/signup",  [{controller, "base"}, {action, "signup" }]}.
 
 {"/blogger/(\\w+)", [{controller, "blogger"}, {action, "view"}, {name, '$1'}]}.
 {"/bloggers", [{controller, "blogger"}, {action, "list"}]}.

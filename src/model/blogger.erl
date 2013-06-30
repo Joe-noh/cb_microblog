@@ -17,3 +17,4 @@ session_id() ->
 bake_cookies() ->
     [mochiweb_cookies:cookie("blogger_id", Id, [{path, "/"}]),
      mochiweb_cookies:cookie("session_id", session_id(), [{path, "/"}])].
+
