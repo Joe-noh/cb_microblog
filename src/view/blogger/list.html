@@ -1,7 +1,15 @@
-<h1>Bloggers</h1>
+{% extends "base.html" %}
 
-<ul>
-	{% for blogger in bloggers %}
-	<li><a href="/blogger/{{ blogger.name }}">{{ blogger.name }}</a></li>
-	{% endfor %}
-</ul>
+{% block title %}CB Microblog | Bloggers{% endblock %}
+
+{% block page_title %}Bloggers{% endblock %}
+
+{% block content %}
+<table class="table table-hover">
+    {% for blogger in bloggers %}
+    <tr onclick="window.location.href = '/blogger/{{ blogger.name }}'">
+        <td>{{ blogger.name }}</td>
+    </tr>
+   {% endfor %}
+</table>
+{% endblock %}
