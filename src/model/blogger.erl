@@ -6,7 +6,8 @@
 validation_tests() ->
     [
     {fun() -> my_util:is_match(Name, "^[\\w]+$") end, "Name can contain A-Z, a-z, 0-9 and underscore."},
-    {fun() -> boss_db:count(blogger, [{name, equals, Name}]) =:= 0 end, "The name is already registered."}
+    {fun() -> boss_db:count(blogger, [{name, equals, Name}]) =:= 0 end,
+              my_util:format_string("The name ~p is already registered.", [Name])}
     ].
 
 authenticate(Password) ->
@@ -19,3 +20,6 @@ bake_cookies() ->
     [mochiweb_cookies:cookie("blogger_id", Id, [{path, "/"}]),
      mochiweb_cookies:cookie("session_id", session_id(), [{path, "/"}])].
 
+discard_cookies() ->
+    [mochiweb_cookies:cookie("blogger_id", "", [{path, "/"}]),
+     mochiweb_cookies:cookie("session_id", "", [{path, "/"}])].

@@ -23,7 +23,7 @@ signin('POST', []) ->
     GivenPass = Req:post_param("password"),
     case boss_db:find_first(blogger, [name, equals, Name]) of
         undefined ->
-            {ok, [{error, my_util:string_format("'~p' does not exist.", [Name])}]};
+            {ok, [{error, my_util:format_string("~p does not exist.", [Name])}]};
         Blogger ->
             case Blogger:authenticate(GivenPass) of
                 true ->
@@ -32,9 +32,6 @@ signin('POST', []) ->
                     {ok, [{error, "Authentication failed."}]}
             end
     end.
-
-signout('GET', []) ->
-    {redirect, "/", auth_helper:discard_cookies()}.
 
 signup('GET',  []) ->
     case auth_helper:is_logged_in(Req) of
@@ -50,7 +47,10 @@ signup('POST', []) ->
             Salt = auth_helper:generate_salt(),
             Digest = mochihex:to_hex(crypto:sha(Password ++ Salt)),
             Blogger = blogger:new(id, Name, Digest, Salt),
-            {ok, [Blogger:save()]};
+            case Blogger:save() of
+                {ok, _} -> {redirect, "/"};
+                {error, Why} -> {ok, [{error, Why}]}
+            end;
         false ->
             {ok, [{error, "Password Confirmation must match Password."}]}
     end.

@@ -1,14 +1,24 @@
 {% extends "base.html" %}
 
-{% block content %}
-<h1>Blogger {{ blogger.name }}'s Page</h1>
+{% block title %}CB Microblog | {{ blogger.name }}{% endblock %}
 
-<table class="table">
-	{% for status in statuses %}
-	<tr>
-		<td>{{ status.text }}</td>
-		<td>{{ status.timestamp|timestamp2date }}</td>
-	</tr>
-	{% endfor %}
+{% block page_title %}Blogger {{ blogger.name }}'s Page{% endblock %}
+
+{% block content %}
+{% if loggingin.name == blogger.name %}
+    <form class="form-inline" method="post">
+        <input size="80" name="text" type="text" placeholder="What are you doing?"/>
+        <button class="btn" type="submit">Submit</button>
+    </form>
+{% endif %}
+<table class="table table-stripe" style="width: 100%">
+    <tbody>
+        {% for status in statuses %}
+        <tr>
+            <td style="text-align: left">{{ status.text }}</td>
+            <td style="text-align: right">{{ status.timestamp|timestamp2date }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

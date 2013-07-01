@@ -4,14 +4,23 @@
 before_(_) ->
 	auth_helper:require_login(Req).
 
-view('GET', [Name], LoggedInBlogger) ->
+view('GET', [Name], LoggingInBlogger) ->
 	case boss_db:find_first(blogger, [{name, equals, Name}]) of
 		undefined -> {redirect, "/"};
-		Blogger   -> {ok, [{blogger, Blogger}, {statuses, Blogger:statuses()}, {loggedin, LoggedInBlogger}]}
+		Blogger   -> {ok, [{blogger, Blogger}, {statuses, Blogger:statuses()}, {loggingin, LoggingInBlogger}]}
+	end;
+view('POST', [Name], LoggingInBlogger) ->
+	Status = status:new(id, LoggingInBlogger:id(), Req:post_param("text"), timestamp),
+	case Status:save() of
+		{ok, _} -> {redirect, "/blogger/"++LoggingInBlogger:name()};
+		{error, Why} -> {ok, [{error, Why}]}
 	end.
 
-list('GET', [], LoggedInBlogger) ->
+list('GET', [], LoggingInBlogger) ->
 	case boss_db:find(blogger, []) of
 		{error, Why} -> {redirect, "/"};
-		Bloggers     -> {ok, [{bloggers, Bloggers}, {loggedin, LoggedInBlogger}]}
+		Bloggers     -> {ok, [{bloggers, Bloggers}, {loggedin, LoggingInBlogger}]}
 	end.
+
+signout('GET', [], LoggingInBlogger) ->
+    {redirect, "/", LoggingInBlogger:discard_cookies()}.

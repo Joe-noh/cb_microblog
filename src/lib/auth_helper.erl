@@ -2,7 +2,7 @@
 -compile(export_all).
 
 generate_salt() ->
-	binary_to_list(base64:encode(crypto:strong_rand_bytes(10))).
+	binary_to_list(base64:encode(crypto:strong_rand_bytes(40))).
 
 require_login(Req) ->
     case is_logged_in(Req) of
@@ -24,6 +24,3 @@ is_logged_in(Req) ->
             end
      end.
 
-discard_cookies() ->
-    [mochiweb_cookies:cookie("blogger_id", "", [{path, "/"}]),
-     mochiweb_cookies:cookie("session_id", "", [{path, "/"}])].
