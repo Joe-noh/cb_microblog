@@ -5,7 +5,8 @@
 
 validation_tests() ->
     [
-    {fun() -> my_util:is_match(Name, "^[\\w]+$") end, "Name can contain A-Z, a-z, 0-9 and underscore."}
+    {fun() -> my_util:is_match(Name, "^[\\w]+$") end, "Name can contain A-Z, a-z, 0-9 and underscore."},
+    {fun() -> boss_db:count(blogger, [{name, equals, Name}]) =:= 0 end, "The name is already registered."}
     ].
 
 authenticate(Password) ->
