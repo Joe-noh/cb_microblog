@@ -45,7 +45,7 @@ signup('POST', []) ->
     case Password =:= Confirm of
         true ->
             Salt = auth_helper:generate_salt(),
-            Digest = mochihex:to_hex(crypto:sha(Password ++ Salt)),
+            Digest = mochihex:to_hex(crypto:md5(Password ++ Salt)),
             Blogger = blogger:new(id, Name, Digest, Salt),
             case Blogger:save() of
                 {ok, _} -> {redirect, "/"};

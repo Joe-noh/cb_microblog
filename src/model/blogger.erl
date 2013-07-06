@@ -11,7 +11,7 @@ validation_tests() ->
     ].
 
 authenticate(Password) ->
-    Digest =:= mochihex:to_hex(crypto:sha(Password ++ Salt)).
+    Digest =:= mochihex:to_hex(erlang:md5(Password ++ Salt)).
 
 session_id() ->
     mochihex:to_hex(crypto:sha(Salt ++ Id)).
