@@ -17,7 +17,7 @@ You can try quickly.
 
 ## Caution
 
-This application uses MD5 to encrypt passwords easily.
+This application uses MD5 to encrypt passwords.
 But this is dangerous. Please do NOT imitate this in production env.
 I recommend bcrypt or scrypt.
 
